@@ -2,7 +2,8 @@ import os
 import glob
 import argparse
 import matplotlib
-
+from PIL import Image
+import numpy as np
 # Keras / TensorFlow
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '5'
 from keras.models import load_model
@@ -28,17 +29,26 @@ print('\nModel loaded ({0}).'.format(args.model))
 
 # Input images
 inputs = load_images( glob.glob(args.input) )
+
+
 print('\nLoaded ({0}) images of size {1}.'.format(inputs.shape[0], inputs.shape[1:]))
 
 # Compute results
 outputs = predict(model, inputs)
+# (inputs[0] * 255).astype(np.uint8)
+# x = outputs[0].reshape(640, 480)
+print(type(outputs[0]))
+x = np.squeeze((outputs[0] * 255).astype(np.uint8), axis=2)
+im = Image.fromarray(x )
+im.save("depth.png")
 
 #matplotlib problem on ubuntu terminal fix
 #matplotlib.use('TkAgg')   
 
 # Display results
-viz = display_images(outputs.copy(), inputs.copy())
-plt.figure(figsize=(10,5))
-plt.imshow(viz)
-plt.savefig('test.png')
-plt.show()
+# viz = display_images(outputs.copy(), inputs.copy())
+# plt.figure(figsize=(1,1))
+# plt.imshow(viz)
+# plt.savefig('test.png')
+# im = Image.fromarray(outputs[0])
+# im.save("depth.png")
