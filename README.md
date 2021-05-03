@@ -1,3 +1,5 @@
+Forked project to generate depth images for vr/ar scenarios. It worked ok but not perfect, i give it a 6/10
+
 ## [High Quality Monocular Depth Estimation via Transfer Learning (arXiv 2018)](https://arxiv.org/abs/1812.11941)
 **[Ibraheem Alhashim](https://ialhashim.github.io/)** and **Peter Wonka**
 
